@@ -22,7 +22,7 @@ export class HomePage {
   }
 
   handleClick(input, operator) {
-    debugger;
+
     if (operator) {
       if(this.index === 1) {
 
