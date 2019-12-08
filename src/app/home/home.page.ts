@@ -9,6 +9,8 @@ export class HomePage {
 
   value: number;
 
+  path: string = '';
+
 
   side: [number, number];
   index: number;
@@ -22,6 +24,8 @@ export class HomePage {
   }
 
   handleClick(input, operator) {
+
+    this.path = this.path.concat(input);
 
     if (operator) {
       if(this.index === 1) {
