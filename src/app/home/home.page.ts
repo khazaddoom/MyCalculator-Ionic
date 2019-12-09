@@ -11,7 +11,7 @@ export class HomePage {
   currentOperand: number = null;
   operation = '';
 
-  displayValue: number;
+  displayValue: number = 0;
   path = '';
 
   constructor() { }
@@ -61,6 +61,7 @@ debugger;
     this.currentOperand = null;
     this.previousOperand = null;
     this.path = '';
+    this.displayValue = 0;
   }
 
 }

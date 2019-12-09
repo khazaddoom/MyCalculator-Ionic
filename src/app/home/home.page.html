@@ -1,9 +1,9 @@
 <ion-content>
   <div>
-    <div class="calculator">
-      <h1>{{ path }}</h1>
+      <h1 class="path">{{ path }}</h1>
+    <div class="calculator">      
       <input type="text" class="calculator__display" value="{{ displayValue }}" disabled />
-  
+
       <button (click) = "reset()" class="btn input-container__item btn-red col_1-4">{{ 'AC' }}</button>
       <button (click) = "handleClick('+', true)" class="btn input-container__item">{{ '+' }}</button>
       <button (click) = "handleClick('-', true)" class="btn input-container__item">{{ '-' }}</button>
