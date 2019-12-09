@@ -15,7 +15,7 @@ export class HomePage {
   side: [number, number];
   index: number;
 
-  lastOperator: null;
+  operateOn = null;
 
   constructor() { }
 
@@ -24,22 +24,34 @@ export class HomePage {
   }
 
   handleClick(input, operator) {
-
+debugger;
     this.path = this.path.concat(input);
 
     if (operator) {
-      if(this.index === 1) {
 
-        this.value = this.calculate();
-        this.side[0] = this.value;
-        this.side[1] = 0;
+      if(input === 'AC') this.initialize();
+      
+      if(this.index === 1) {
+        // calculate(this.operateOn)
+        this.value = this.calculate(this.operateOn);
+        
+        if(input !== '=')
+          this.operateOn = input;
+        else {
+          this.index = 1;
+        }
 
       } else {
-        this.lastOperator = input;
-        this.index = 1;
-      }     
+        this.operateOn = input;
+        this.index = this.index === 0? 1 : 0; // We only need a 2 index array.
+      }   
+      
+
     } else {
-      this.side[this.index] = (this.side[this.index] * 10) + input;
+      if(this.side[this.index] === 0)
+        this.side[this.index] = (this.side[this.index] * 10) + input;
+      else
+        this.side[this.index] = input;
     }
 
   }
@@ -52,27 +64,27 @@ export class HomePage {
 
   }
 
-  calculate() {
+  calculate(operateOn) {
 
-    let result = 0;
-
-    if(!this.lastOperator) return result;
-
-    switch(this.lastOperator) {
-      
-      case '+':
-        result = this.side[0] + this.side[1];
+    switch(operateOn) {
+      case '+': {
+        this.side[0] = this.side[0] + this.side[1];
         break;
-    
-      case '*':
-          result = this.side[0] * this.side[1];
-          break;
+      }
 
-      default:
+      case '-': {
+        this.side[0] = this.side[0] - this.side[1];
         break;
+      }
+
+      case '*': {
+        this.side[0] = this.side[0] * this.side[1];
+        break;
+      }
     }
 
-    return result;
+    return this.side[0];
+
   }
 
 
