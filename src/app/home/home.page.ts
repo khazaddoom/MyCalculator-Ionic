@@ -7,11 +7,12 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  previousOperand = '';
-  currentOperand = '';
+  previousOperand: number = null;
+  currentOperand: number = null;
   operation = '';
 
-  displayValue = '';
+  displayValue: number;
+  path = '';
 
   constructor() { }
 
@@ -19,29 +20,33 @@ export class HomePage {
 
   handleClick(input, operatorOrNumber) {
 debugger;
+    this.path = this.path + ' ' + input;
+
     if (operatorOrNumber) {
-      if(this.previousOperand !== '' && this.currentOperand !== '') {
+      if(this.previousOperand !== null && this.currentOperand !== null) {
         this.calculate();
         this.operation = input;
-        this.currentOperand = '';
+        this.currentOperand = null;
       }
       else if(input === '=') {
+        this.path = '';
         this.calculate();
         this.previousOperand = this.displayValue;
-        this.currentOperand = '';
+        this.currentOperand = null;
       } else {
         this.operation = input;
         this.previousOperand = this.currentOperand;
-        this.currentOperand = '';
+        this.currentOperand = null;
       }
     } else {
-      this.currentOperand = this.currentOperand + input;
+      this.currentOperand = (this.currentOperand*10) + input;
     }
+
   }
 
   calculate() {
     
-    if(this.previousOperand === '' || this.currentOperand === '') return;
+    if(this.previousOperand === null || this.currentOperand === null) return;
 
     switch(this.operation) {
       
@@ -50,6 +55,12 @@ debugger;
       }
 
     }
+  }
+
+  reset() {
+    this.currentOperand = null;
+    this.previousOperand = null;
+    this.path = '';
   }
 
 }

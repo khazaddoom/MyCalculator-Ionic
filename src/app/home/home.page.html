@@ -2,9 +2,9 @@
   <div>
     <div class="calculator">
       <h1>{{ path }}</h1>
-      <input type="text" class="calculator__display" value="{{ value }}" disabled />
+      <input type="text" class="calculator__display" value="{{ displayValue }}" disabled />
   
-      <button (click) = "handleClick('AC', true)" class="btn input-container__item btn-red col_1-4">{{ 'AC' }}</button>
+      <button (click) = "reset()" class="btn input-container__item btn-red col_1-4">{{ 'AC' }}</button>
       <button (click) = "handleClick('+', true)" class="btn input-container__item">{{ '+' }}</button>
       <button (click) = "handleClick('-', true)" class="btn input-container__item">{{ '-' }}</button>
       <button (click) = "handleClick('*', true)" class="btn input-container__item">{{ '*' }}</button>
