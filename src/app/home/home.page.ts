@@ -7,61 +7,38 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  previousOperand: number = null;
-  currentOperand: number = null;
-  operation = '';
-
   displayValue: number = 0;
-  path = '';
+
+  operands = [0, 0];
+  index = 0;
+  operator = ''
 
   constructor() { }
 
   ngOnInit() {}
 
-  handleClick(input, operatorOrNumber) {
-debugger;
-    this.path = this.path + ' ' + input;
+  handleClick(input, isOperator) {
 
-    if (operatorOrNumber) {
-      if(this.previousOperand !== null && this.currentOperand !== null) {
-        this.calculate();
-        this.operation = input;
-        this.currentOperand = null;
-      }
-      else if(input === '=') {
-        this.path = '';
-        this.calculate();
-        this.previousOperand = this.displayValue;
-        this.currentOperand = null;
-      } else {
-        this.operation = input;
-        this.previousOperand = this.currentOperand;
-        this.currentOperand = null;
-      }
+    if(isOperator) {
+      // operator block
+      this.operator = input;
+      this.index = (this.index == 0)? 1: 0;
     } else {
-      this.currentOperand = (this.currentOperand*10) + input;
+      //number
+      this.operands[this.index] = (this.operands[this.index] * 10) + +input;
     }
 
-  }
-
-  calculate() {
-    
-    if(this.previousOperand === null || this.currentOperand === null) return;
-
-    switch(this.operation) {
-      
-      case '+': {
-        this.displayValue = this.currentOperand + this.previousOperand;
-      }
-
-    }
   }
 
   reset() {
-    this.currentOperand = null;
-    this.previousOperand = null;
-    this.path = '';
+    this.operands = [0, 0];
+    this.operator = '';
+    this.index = 0;
     this.displayValue = 0;
+  }
+
+  get path() {
+    return `${this.operands[0]} ${this.operator} ${this.operands[1]}`;
   }
 
 }
