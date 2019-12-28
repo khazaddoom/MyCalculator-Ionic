@@ -21,8 +21,15 @@ export class HomePage {
 
     if(isOperator) {
       // operator block
+      
+      if(this.index == 1) {
+        this.calculate(input);
+      } else {
+        this.index = 1;
+      }
+
       this.operator = input;
-      this.index = (this.index == 0)? 1: 0;
+
     } else {
       //number
       this.operands[this.index] = (this.operands[this.index] * 10) + +input;
@@ -39,6 +46,34 @@ export class HomePage {
 
   get path() {
     return `${this.operands[0]} ${this.operator} ${this.operands[1]}`;
+  }
+
+  calculate(currentOperator) {
+    // do the thing
+    switch(this.operator) {
+      case '+': {
+        this.operands[0] = this.operands[0] + this.operands[1];
+        break;
+      }
+      case '-': {
+        this.operands[0] = this.operands[0] - this.operands[1];
+        break;
+      }
+      case '*': {
+        this.operands[0] = this.operands[0] * this.operands[1];
+        break;
+      }
+      case '/': {
+        this.operands[0] = this.operands[0] / this.operands[1];
+        break;
+      }
+      default: break;
+    }
+    this.displayValue = this.operands[0]
+    this.operands[1] = 0;
+
+    this.operator = currentOperator;
+
   }
 
 }
